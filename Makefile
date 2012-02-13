@@ -2,7 +2,6 @@ BOOTSTRAP = ./docs/assets/css/bootstrap.css
 BOOTSTRAP_LESS = ./less/bootstrap.less
 BOOTSTRAP_RESPONSIVE = ./docs/assets/css/bootstrap-responsive.css
 BOOTSTRAP_RESPONSIVE_LESS = ./less/responsive.less
-JSFILES = `find js -maxdepth 1 -mindepth 1 -type f -name 'bootstrap-*.js'`
 LESS_COMPRESSOR ?= `which lessc`
 WATCHR ?= `which watchr`
 
@@ -23,9 +22,9 @@ docs: bootstrap
 	cp js/tests/vendor/jquery.js docs/assets/js/
 
 proper:
-	@for F in $(JSFILES); do \
-		cat $$F | sed 's/\(window\.jQuery )\)\([;]*\)/\1;/' > $$F.proper; \
-		mv $$F.proper $$F; \
+	@for F in `find js -maxdepth 1 -mindepth 1 -type f -name 'bootstrap-*.js'`; do \
+		cat $$F | sed 's/\(window\.jQuery.*)\)\([;]*\)/\1;/' > $$F.tmp; \
+		mv $$F.tmp $$F; \
 	done
 
 #
