@@ -23,7 +23,7 @@ docs: bootstrap
 
 proper:
 	@for F in `find js -maxdepth 1 -mindepth 1 -name "bootstrap-*.js"`; do \
-		cat $$F | uglifyjs -b -nc -nm -nmf -ns > $$F.tmp; \
+		cat $$F | uglifyjs -b -nm -nmf -ns > $$F.tmp; \
 		mv $$F.tmp $$F; \
 	done
 
