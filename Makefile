@@ -22,8 +22,8 @@ docs: bootstrap
 	cp js/tests/vendor/jquery.js docs/assets/js/
 
 proper:
-	@for F in `find js -maxdepth 1 -mindepth 1 -type f -name 'bootstrap-*.js'`; do \
-		cat $$F | sed 's/\(window\.jQuery.*)\)\([;]*\)/\1;/' > $$F.tmp; \
+	@for F in `find js -maxdepth 1 -mindepth 1 -name "bootstrap-*.js"`; do \
+		cat $$F | uglifyjs -b -nc -nm -nmf -ns > $$F.tmp; \
 		mv $$F.tmp $$F; \
 	done
 
