@@ -21,11 +21,25 @@ docs: bootstrap
 	cp js/tests/vendor/jquery.js docs/assets/js/
 	cp js/tests/vendor/jquery.js docs/assets/js/
 
-proper:
+#
+# BUILD ALTERNATE JS PLUGIN FILES WITH SEMICOLONS
+# uglifyjs is required
+#
+# This target allows us to created 'beautified' JS files with semicolons etc... in the
+# altjs directory. This should make maintaining this fork really easy since we are not
+# overriding any files from the main repository
+#
+
+altjs:
+	@mkdir altjs
+	@rm -f altjs/bootstrap-*.js
 	@for F in `find js -maxdepth 1 -mindepth 1 -name "bootstrap-*.js"`; do \
-		cat $$F | uglifyjs -b -nm -nmf -ns > $$F.tmp; \
-		mv $$F.tmp $$F; \
+		NEWF="altjs/`basename $$F`"; \
+		cat $$F | uglifyjs -b -nm -nmf -ns > $$NEWF; \
+		echo "Created alternate js file with semicolons at $$NEWF"; \
 	done
+
+proper: altjs
 
 #
 # BUILD SIMPLE BOOTSTRAP DIRECTORY
@@ -62,4 +76,4 @@ watch:
 	watchr -e "watch('less/.*\.less') { system 'make' }"
 
 
-.PHONY: dist docs watch gh-pages
+.PHONY: dist docs watch gh-pages altjs proper
