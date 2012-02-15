@@ -1,7 +1,7 @@
 NOTE
 ====
 
-This repo does not add any new functionality to the original <a href="https://github.com/twitter/bootstrap">Twitter Bootstrap</a> repo. The only change is to the `Makefile` which adds a `proper` target that may be used for generating js files that work well as embeddable components.
+This repo does not add any new functionality to the original <a href="https://github.com/twitter/bootstrap">Twitter Bootstrap</a> repo. The only change is to the `Makefile` which adds a `altjs` target that may be used for generating js files that work well as embeddable components. A test file that relies on the alternate JS files is also provided at the path js/tests/altindex.html
 
 The Problem
 -----------
@@ -13,9 +13,9 @@ The problem with using the concatenated file is that you have to load all the js
 Usage
 -----
 
-* `make proper` to add the missing semicolons to the end of each plugin file.
+* `make altjs` to add the missing semicolons to the end of each plugin file.
 * All other options to `make` remain unchanged.
-
+* To test the alternate JS files, load `js/tests/altindex.html` in your browser.
 
 Copyright and license
 ---------------------
