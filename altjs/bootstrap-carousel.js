@@ -1,5 +1,5 @@
 /* ==========================================================
- * bootstrap-carousel.js v2.0.0
+ * bootstrap-carousel.js v2.0.1
  * http://twitter.github.com/bootstrap/javascript.html#carousel
  * ==========================================================
  * Copyright 2012 Twitter, Inc.
@@ -42,6 +42,7 @@
         },
         pause: function() {
             clearInterval(this.interval);
+            this.interval = null;
             return this;
         },
         next: function() {
@@ -54,6 +55,7 @@
         },
         slide: function(type, next) {
             var $active = this.$element.find(".active"), $next = next || $active[type](), isCycling = this.interval, direction = type == "next" ? "left" : "right", fallback = type == "next" ? "first" : "last", that = this;
+            if (!$next.length) return;
             this.sliding = true;
             isCycling && this.pause();
             $next = $next.length ? $next : this.$element.find(".item")[fallback]();
